@@ -1,0 +1,23 @@
+{
+    "name": "Camect",
+    "docs": "https://github.com/jimboca/udi-poly-camect",
+    "type": "python3",
+    "executable": "camect-poly.py",
+    "install": "install.sh",
+    "description": "Camect Node Server",
+    "notice": "Not responsible for anything",
+    "shortPoll": "120",
+    "longPoll": "240",
+    "testMode": false,
+    "profile_version": "0.0.1",
+    "credits": [
+        {
+            "title": "camect: a NodeServer for Camect Integration",
+            "author": "Jim Searle (JimBoCA)",
+            "version": "0.0.1",
+            "date": "December 13, 2020",
+            "source": "https://github.com/jimboca/udi-poly-camect",
+            "license": "https://raw.githubusercontent.com/jimboca/udi-poly-camect/master/LICENSE"
+        }
+    ]
+}
