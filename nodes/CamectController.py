@@ -19,7 +19,8 @@ class CamectController(Controller):
 
     def start(self):
         self.config_st = False # Configuration good?
-        self.camect = None
+        self.camect = None # The camect api handle
+        self.cams_by_id = {} # The hash of camera nodes by id
         serverdata = self.poly.get_server_data(check_profile=True)
         LOGGER.info('Started Camect NodeServer {}'.format(serverdata['version']))
         # Show values on startup if desired.
@@ -54,7 +55,14 @@ class CamectController(Controller):
             self.hb = 0
 
     def callback(self,event):
+        # {'type': 'alert', 'desc': 'Out Front Door just saw a person.', 'url': 'https://home.camect.com/home/...', 
+        # 'cam_id': '96f69defdef1d0b6602a', 'cam_name': 'Out Front Door', 'detected_obj': ['person']}
         LOGGER.debug(f'{event}')
+        try:
+            if event['cam_id'] in self.cams_by_id:
+                self.cams_by_id[event['cam_id']].callback(event)
+        except:
+            LOGGER.error('in callback: ',exc_info=True)
 
     def connect(self):
         LOGGER.info(f'Connecting to {self.host}...')
@@ -68,12 +76,15 @@ class CamectController(Controller):
         self.discover()
 
     def discover(self, *args, **kwargs):
+        # TODO: Keep cams_by_id in DB to remember across restarts and discovers...
         LOGGER.info('started')
+        cnt = 1
         for cam in self.camect.list_cameras():
             print(cam)
             # Only add enabled cameras?
             if not cam['disabled']:
-                self.addNode(Camera(self, self, cam))
+                self.cams_by_id[cam['id']] = self.addNode(Camera(self, cnt, cam))
+                cnt += 1
         LOGGER.info('completed')
 
     def delete(self):
@@ -118,8 +129,24 @@ class CamectController(Controller):
             level = 30
         LOGGER.info('set_debug_level: Set GV1 to {}'.format(level))
         self.setDriver('GV1', level)
+        # For now we don't want to see all this
+        # TODO: Add another level = 8
+        logging.getLogger("websockets.protocol").setLevel(logging.WARNING)
         # 0=All 10=Debug are the same because 0 (NOTSET) doesn't show everything.
         if level <= 10:
+            # this is the best way to control logging for modules, so you can
+            # still see warnings and errors
+            #if level < 10:
+            #    self.set_module_logs(logging.DEBUG)
+            #else:
+            #    # Just warnigns for the modules unless in module debug mode
+            #    self.set_module_logs(logging.WARNING)
+            # Or you can do this and you will never see mention of module logging
+            if level < 10:
+                LOG_HANDLER.set_basic_config(True,logging.DEBUG)
+            else:
+                # This is the polyinterface default
+                LOG_HANDLER.set_basic_config(True,logging.WARNING)
             LOGGER.setLevel(logging.DEBUG)
         elif level == 20:
             LOGGER.setLevel(logging.INFO)
@@ -131,19 +158,6 @@ class CamectController(Controller):
             LOGGER.setLevel(logging.CRITICAL)
         else:
             LOGGER.debug("set_debug_level: Unknown level {}".format(level))
-        # this is the best way to control logging for modules, so you can
-        # still see warnings and errors
-        #if level < 10:
-        #    self.set_module_logs(logging.DEBUG)
-        #else:
-        #    # Just warnigns for the modules unless in module debug mode
-        #    self.set_module_logs(logging.WARNING)
-        # Or you can do this and you will never see mention of module logging
-        if level < 10:
-            LOG_HANDLER.set_basic_config(True,logging.DEBUG)
-        else:
-            # This is the polyinterface default
-            LOG_HANDLER.set_basic_config(True,logging.WARNING)
 
     def check_params(self):
         """
@@ -197,4 +211,5 @@ class CamectController(Controller):
     drivers = [
         {'driver': 'ST', 'value': 1, 'uom': 2}, 
         {'driver': 'GV1', 'value': 10, 'uom': 25}, # Debug (Log) Mode, default=30=Warning
+        {'driver': 'GV2', 'value': 1, 'uom': 2},  # Connected
     ]
