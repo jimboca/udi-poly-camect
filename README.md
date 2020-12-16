@@ -10,7 +10,9 @@ Install from the Polyglot Store.  See [Configuration](POLYGLOT_CONFIG.md) on the
 
 ## Requirements
 
-This has been tested on an RPI running the latest Buster release and the Polisy.  You must have Python verison 3.6 or newer.
+This has been tested on an RPI running the latest Buster release and the Polisy.  
+- You must have Python verison 3.6 or newer.
+- This uses the [Camect Python Library](https://github.com/camect/camect-py)
 
 ## Using this Nodeserver
 
