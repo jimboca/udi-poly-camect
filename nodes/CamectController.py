@@ -59,8 +59,17 @@ class CamectController(Controller):
         # 'cam_id': '96f69defdef1d0b6602a', 'cam_name': 'Out Front Door', 'detected_obj': ['person']}
         LOGGER.debug(f'{event}')
         try:
-            if event['cam_id'] in self.cams_by_id:
-                self.cams_by_id[event['cam_id']].callback(event)
+            if event['type'] == 'mode':
+                # Can't really use this: {'type': 'mode', 'desc': 'HOME'}
+                pass
+            elif 'cam_id' in event:
+                # Anything with cam get's passed to the camera
+                if event['cam_id'] in self.cams_by_id:
+                    self.cams_by_id[event['cam_id']].callback(event)
+                else:
+                    LOGGER.warning(f"Event for unknown cam_id={event['cam_id']}: {event}")
+            else:
+                LOGGER.error(f'Unknwon event, not type=mode or cam_id: {event}')
         except:
             LOGGER.error('in callback: ',exc_info=True)
 

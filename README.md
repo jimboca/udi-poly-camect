@@ -33,6 +33,8 @@ You can add the nodes to a scene to know when a Skunk enters the front yard ![Sk
 
 ## Version History
 
+- 0.0.3
+    - Fixed event passing, and receiving DON/DOF's in DetectedObject's
 - 0.0.2
     - First working version
 - 0.0.1

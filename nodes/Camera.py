@@ -10,7 +10,7 @@ OBJECT_MAP = {
     'DHL':         'dhl',
     'FedEx':       'fedex',
     'RoyalMail':   'roylmail',
-    'UPS':         'ups',
+    'UPS truck':   'ups',
     'USPS':        'usps',
     'bear':        'bear',
     'bicycle':     'bicycle',
@@ -68,6 +68,7 @@ class Camera(Node):
                 LOGGER.error(f"Unknown alert, no detected_obj in {event}")
 
     def detected_obj(self,object_list):
+        LOGGER.debug(f"{self.lpfx} {object_list}")
         # Clear last detected objects
         # TODO: Would be better to timout and clear these during a short poll, but allow for user specified timeout?
         for obj in OBJECT_MAP:
@@ -75,6 +76,7 @@ class Camera(Node):
         # And set the current ones
         for obj in object_list:
             if obj in OBJECT_MAP:
+                LOGGER.debug(f"{self.lpfx} {obj}")
                 self.detected_obj_by_name[obj].cmd_on()
             else:
                 LOGGER.error(f"Unsupported detected object '{obj}'")
