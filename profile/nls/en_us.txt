@@ -7,7 +7,7 @@ CMD-ctl-UPDATE_PROFILE-NAME = Update Profile
 CMD-ctl-SET_DM-NAME = Set Logger Level
 ST-ctl-ST-NAME = NodeServer Online
 ST-ctl-GV1-NAME = Logger Level
-ST-ctl-GV1-NAME = Connected
+ST-ctl-GV2-NAME = Camect Connected
 
 # Debug/Logger Modes
 CDM-9 = Debug + Modules
