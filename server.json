@@ -9,12 +9,12 @@
     "shortPoll": "120",
     "longPoll": "240",
     "testMode": false,
-    "profile_version": "0.0.2",
+    "profile_version": "0.0.4",
     "credits": [
         {
             "title": "camect: a NodeServer for Camect Integration",
             "author": "Jim Searle (JimBoCA)",
-            "version": "0.0.3",
+            "version": "0.0.4",
             "date": "December 13, 2020",
             "source": "https://github.com/jimboca/udi-poly-Camect",
             "license": "https://raw.githubusercontent.com/jimboca/udi-poly-Camect/master/LICENSE"

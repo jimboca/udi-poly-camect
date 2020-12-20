@@ -24,18 +24,24 @@ class DetectedObject(Node):
             self.reportCmd("DOF",2)
             self.set_driver('ST', 0)
 
+    # This is called by parent when object is detected
+    def turn_on(self):
+        LOGGER.debug(f"{self.lpfx}")
+        self.reportCmd("DON",2)
+        self.set_driver('ST', 1)
+
+    # This is called by parent when object is no longer detected
+    def turn_off(self):
+        LOGGER.debug(f"{self.lpfx}")
+        self.reportCmd("DOF",2)
+        self.set_driver('ST', 0)
+
     def cmd_on(self, command=None):
         LOGGER.debug(f"{self.lpfx} command={command} ST={self.get_driver('ST')}")
-        # IF command is None send DON because we were asked to turn on
-        # When it's not None it came from ISY so we were not the controller
-        if command is None:
-            self.reportCmd("DON",2)
         self.set_driver('ST', 1)
 
     def cmd_off(self, command=None):
         LOGGER.debug(f"{self.lpfx} command={command} ST={self.get_driver('ST')}")
-        if command is None:
-            self.reportCmd("DOF",2)
         self.set_driver('ST', 1)
 
     def query(self,command=None):

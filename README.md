@@ -18,9 +18,9 @@ This has been tested on an RPI running the latest Buster release and the Polisy.
 
 After configuring you should get a Node for each Camera, and under each Camera an ObjectDetected node for each type of object currently detected by Camect.
 
-The conroller looks like this... __Add more info here___
+The conroller looks like this:
 ![The Controller](pics/Controller.png)
-
+The 
 A node is created for each Camera... __Add more info here___
 ![A Camera Node](pics/Camera.png)
 
@@ -33,6 +33,9 @@ You can add the nodes to a scene to know when a Skunk enters the front yard ![Sk
 
 ## Version History
 
+- 0.0.4
+    - Changed methods used to send DON so it's clear in the log
+    - Fixed profile for Controller GV2 name
 - 0.0.3
     - Fixed event passing, and receiving DON/DOF's in DetectedObject's
 - 0.0.2

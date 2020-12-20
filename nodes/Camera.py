@@ -77,7 +77,7 @@ class Camera(Node):
         for obj in object_list:
             if obj in OBJECT_MAP:
                 LOGGER.debug(f"{self.lpfx} {obj}")
-                self.detected_obj_by_name[obj].cmd_on()
+                self.detected_obj_by_name[obj].turn_on()
             else:
                 LOGGER.error(f"Unsupported detected object '{obj}'")
 
