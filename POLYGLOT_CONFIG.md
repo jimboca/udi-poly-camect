@@ -1,4 +1,12 @@
 
-# This is POLYGLOT_CONFIG.md
+# Configure the Camect Node Server
 
-This should have any description about how to configure your nodeserver.
+You must set the following:
+- host: The Camect host.  camect.local should work, but on Polisy you must enter the IP address...
+- user: The Camect local user.
+- password: The Camect local user password
+
+As noted in the [Camect Python client library](https://github.com/camect/camect-py/blob/master/README.md) Please open https://local.home.camect.com/ in browser, sign in as admin and accept TOS before you proceed.
+
+
+
