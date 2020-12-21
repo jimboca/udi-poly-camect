@@ -32,6 +32,7 @@ The main controller node.
         - Info
         - Warning
         - Error
+        
 ![The Controller](pics/Controller.png)
 
 ### Camera
@@ -54,6 +55,7 @@ When the object is detected the ST is set to True and a DON is sent.  The status
 ](https://github.com/jimboca/udi-poly-Camect/issues/3)
 - The Status Shows:
     - Detected: True when object has been detected
+
 ![A Detected Object](pics/DetectedObject.png)
 
 #### How to use Detected Objects
