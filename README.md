@@ -22,30 +22,30 @@ After configuring you should get a Node for each Camera, and under each Camera a
 
 The conroller looks like this:
 ![The Controller](pics/Controller.png)
-The Status shows:
-- Nodeserver Online: Nodeserver connected to Polyglot
-- Camect Connected: Status of connection to your Camect
-- Logger Level: The current Logging level
-The Controls available:
-- Logger Level
-    Usually set to Warning, unless you are debugging issues and want to see all information, but this will use up a lot of disk space. 
-    - Debug + Modules: All Debug including referenced modules
-    - Debug
-    - Info
-    - Warning
-    - Error
+- The Status shows:
+    - Nodeserver Online: Nodeserver connected to Polyglot
+    - Camect Connected: Status of connection to your Camect
+    - Logger Level: The current Logging level
+- The Controls available:
+    - Logger Level
+        Usually set to Warning, unless you are debugging issues and want to see all information, but this will use up a lot of disk space. 
+        - Debug + Modules: All Debug including referenced modules
+        - Debug
+        - Info
+        - Warning
+        - Error
 
 ### Camera
 
 A node is created for each Camera:
 ![A Camera Node](pics/Camera.png)
-The Status shows:
-- Enabled: If the Camera is enabled
-- Alerting: If the Camera is sending Alerts
-- Streaming: If the Camera is streaming
-The Controls Available:
-- Enabled: [Coming soon](https://github.com/jimboca/udi-poly-Camect/issues/1)
-- Alerting: [Coming soon](https://github.com/jimboca/udi-poly-Camect/issues/2)
+- The Status shows:
+    - Enabled: If the Camera is enabled
+    - Alerting: If the Camera is sending Alerts
+    - Streaming: If the Camera is streaming
+- The Controls Available:
+    - Enabled: [Coming soon](https://github.com/jimboca/udi-poly-Camect/issues/1)
+    - Alerting: [Coming soon](https://github.com/jimboca/udi-poly-Camect/issues/2)
 
 ### Detected Object
 
@@ -53,8 +53,8 @@ The Camera nodes all have a child node for each known detected object type by Ca
 When the object is detected the ST is set to True and a DON is sent.  The status remains True until a different type of obejct is detected See: [Should timeout be set for detected object #3
 ](https://github.com/jimboca/udi-poly-Camect/issues/3)
 ![A Detected Object](pics/DetectedObject.png)
-The Status Shows:
-- Detected: True when object has been detected
+- The Status Shows:
+    - Detected: True when object has been detected
 
 #### How to use Detected Objects
 
