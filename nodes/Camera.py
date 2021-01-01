@@ -36,7 +36,7 @@ class Camera(Node):
         # 'cam_id': '96f69defdef1d0b6602a', 'cam_name': 'Out Front Door', 'detected_obj': ['person']}
         LOGGER.debug(f"{self.lpfx} type={event['type']}")
         if event['type'] == 'alert':
-            if 'detected_obj' in DETECTED_OBJECT_MAP:
+            if 'detected_obj' in event:
                 self.detected_obj(event['detected_obj'])
             else:
                 LOGGER.error(f"Unknown alert, no detected_obj in {event}")
