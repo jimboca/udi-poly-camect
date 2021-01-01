@@ -18,17 +18,127 @@ CDM-40 = Error
 CDM-50 = Critical
 
 #
+# Camect Host
+#
+ND-host-NAME = Camect Host
+ST-host-ST-NAME = Camect Connected
+
+
+#
 # Camera
 #
 ND-camera-NAME = Camect Camera
 ST-camera-ST-NAME = Enabled
 CMD-tmplnode-DON-NAME = Enable
 CMD-tmplnode-DOF-NAME = Disable
-ST-camera-GV0-NAME = Alerting
-ST-camera-GV1-NAME = Streaming
+ST-camera-ALARM-NAME = Object Detected
+ST-camera-MODE-NAME = Alerting
+ST-camera-GPV-NAME = Streaming
 
 #
-# Object Detected
+# Object: Human
 #
-ND-objdet-NAME = Camect ObjectDetected
-ST-objdet-ST-NAME = Detected
+ST-human-GV0-NAME = Santa Claus
+ST-human-GV1-NAME = Person
+CMD-human-GV0-NAME = Santa Claus
+CMD-human-GV1-NAME = Person
+#
+# Object: Vehicle
+#
+ST-vehicle-GV0-NAME = Amazon
+ST-vehicle-GV1-NAME = DHL
+ST-vehicle-GV2-NAME = FedEx
+ST-vehicle-GV3-NAME = Royal Mail
+ST-vehicle-GV4-NAME = UPS Truck
+ST-vehicle-GV5-NAME = USPS
+ST-vehicle-GV6-NAME = Bicycle
+ST-vehicle-GV7-NAME = Bus
+ST-vehicle-GV8-NAME = Car
+ST-vehicle-GV9-NAME = Motorcycle
+ST-vehicle-GV10-NAME = Pickup
+ST-vehicle-GV11-NAME = Truck
+CMD-vehicle-GV0-NAME = Amazon
+CMD-vehicle-GV1-NAME = DHL
+CMD-vehicle-GV2-NAME = FedEx
+CMD-vehicle-GV3-NAME = Royal Mail
+CMD-vehicle-GV4-NAME = UPS Truck
+CMD-vehicle-GV5-NAME = USPS
+CMD-vehicle-GV6-NAME = Bicycle
+CMD-vehicle-GV7-NAME = Bus
+CMD-vehicle-GV8-NAME = Car
+CMD-vehicle-GV9-NAME = Motorcycle
+CMD-vehicle-GV10-NAME = Pickup
+CMD-vehicle-GV11-NAME = Truck
+#
+# Object: Animal
+#
+ST-animal-GV0-NAME = Bear
+ST-animal-GV1-NAME = Bird
+ST-animal-GV2-NAME = Cat
+ST-animal-GV3-NAME = Deer
+ST-animal-GV4-NAME = Dog
+ST-animal-GV5-NAME = Mouse
+ST-animal-GV6-NAME = Rabbit
+ST-animal-GV7-NAME = Raccoon
+ST-animal-GV8-NAME = Skunk
+ST-animal-GV9-NAME = Squirrel
+ST-animal-GV10-NAME = Unknown Animal
+ST-animal-GV11-NAME = Unknown Small Animal
+CMD-animal-GV0-NAME = Bear
+CMD-animal-GV1-NAME = Bird
+CMD-animal-GV2-NAME = Cat
+CMD-animal-GV3-NAME = Deer
+CMD-animal-GV4-NAME = Dog
+CMD-animal-GV5-NAME = Mouse
+CMD-animal-GV6-NAME = Rabbit
+CMD-animal-GV7-NAME = Raccoon
+CMD-animal-GV8-NAME = Skunk
+CMD-animal-GV9-NAME = Squirrel
+CMD-animal-GV10-NAME = Unknown Animal
+CMD-animal-GV11-NAME = Unknown Small Animal
+#
+# Object: Insect
+#
+ST-insect-GV0-NAME = Fly
+ST-insect-GV1-NAME = Spider
+CMD-insect-GV0-NAME = Fly
+CMD-insect-GV1-NAME = Spider
+
+
+ST-camera-ALARM-NAME = Detected Object
+OBJ-0 = None
+OBJ-1 = Santa Claus
+OBJ-2 = Amazon
+OBJ-3 = DHL
+OBJ-4 = FedEx
+OBJ-5 = RoyalMail
+OBJ-6 = UPS truck
+OBJ-7 = USPS
+OBJ-8 = bear
+OBJ-9 = bicycle
+OBJ-10 = bird
+OBJ-11 = bus
+OBJ-12 = car
+OBJ-13 = cat
+OBJ-14 = deer
+OBJ-15 = dog
+OBJ-15 = motorcycle
+OBJ-17 = mouse
+OBJ-18 = person
+OBJ-19 = pickup
+OBJ-20 = rabbit
+OBJ-21 = raccoon
+OBJ-22 = skunk
+OBJ-23 = squirrel
+OBJ-24 = truck
+OBJ-25 = unknown animal
+OBJ-26 = unknown small animal
+OBJ-27 = fly
+OBJ-28 = spider
+OBJ-29 = person and dog
+
+#
+# Object Detected, not used anymore
+#
+#ND-objdet-NAME = Camect ObjectDetected
+#ST-objdet-ST-NAME = Detected

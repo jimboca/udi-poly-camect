@@ -6,4 +6,7 @@
     <editor id="I_DEBUG">
       <range uom="25" subset="9,10,20,30,40,50" nls="CDM"/>
     </editor>
+    <editor id="I_OBJ">
+      <range uom="25" min="0" max="28" nls="OBJ"/>
+    </editor>
 </editors>

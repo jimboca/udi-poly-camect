@@ -2,6 +2,7 @@
 # Configure the Camect Node Server
 
 You must set the following:
+
 - host: The Camect host.  camect.local should work, but on Polisy you must enter the IP address...
 - user: The Camect local user.
 - password: The Camect local user password

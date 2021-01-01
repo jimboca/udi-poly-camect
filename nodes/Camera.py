@@ -2,54 +2,28 @@
 from polyinterface import Node,LOGGER
 from node_funcs import id_to_address,get_valid_node_name
 from nodes import DetectedObject
-
-# Map name to address, most are the same but address must be <=7 characters
-OBJECT_MAP = {
-    'Santa Claus': 'santa',
-    'Amazon':      'amazon',
-    'DHL':         'dhl',
-    'FedEx':       'fedex',
-    'RoyalMail':   'roylmail',
-    'UPS truck':   'ups',
-    'USPS':        'usps',
-    'bear':        'bear',
-    'bicycle':     'bicycle',
-    'bird':        'bird',
-    'bus':         'bus',
-    'car':         'car',
-    'cat':         'cat',
-    'deer':        'deer',
-    'dog':         'dog',
-    'motorcycle':  'mtrcycle',
-    'mouse':       'mouse',
-    'person':      'person',
-    'pickup':      'pickup',
-    'rabbit':      'rabbit',
-    'raccoon':     'raccoon',
-    'skunk':       'skunk',
-    'squirrel':    'squirrel',
-    'truck':       'truck',
-    'unknown animal': 'unkanml',
-    'unknown small animal': 'unksmanm',
-    'fly':                  'fly', 
-    'spider':               'spider',
-}
+from const import DETECTED_OBJECT_MAP
 
 class Camera(Node):
-    def __init__(self, controller, num, cam=None):
+    def __init__(self, controller, host, num, cam=None):
         #print("%s(%s) @%s(%s)" % (cam["name"], cam["make"], cam["ip_addr"], cam["mac_addr"]))
+        self.host = host
         self.cam = cam
-        self.detected_obj_by_name = {}
-        address = f'c{num:04d}' 
+        self.detected_obj_by_type = {}
+        address = self.host.camect.get_id()[:9] + f'{int(num):02d}'
         super(Camera, self).__init__(controller, address, address, get_valid_node_name(cam['name']))
         self.lpfx = '%s:%s' % (self.address,self.name)
 
     def start(self):
         self.setDriver('ST',0  if self.cam['disabled']          else 1)
-        self.setDriver('GV0',0 if self.cam['is_alert_disabled'] else 1)
-        self.setDriver('GV1',1 if self.cam['is_streaming']      else 0)
-        for obj_name in OBJECT_MAP:
-            self.detected_obj_by_name[obj_name] = self.controller.addNode(DetectedObject(self.controller, self, f'{self.address}_{OBJECT_MAP[obj_name]}', f'{self.name} {obj_name}'))
+        self.setDriver('MODE',0 if self.cam['is_alert_disabled'] else 1)
+        self.setDriver('GPV', 1 if self.cam['is_streaming']      else 0)
+        self.setDriver('ALARM',0)
+        for cat in DETECTED_OBJECT_MAP:
+            node = self.controller.addNode(DetectedObject(self.controller, self, cat))
+            # Keep track of which node handles which detected object type.
+            for otype in DETECTED_OBJECT_MAP[cat]:
+                self.detected_obj_by_type[otype] = node
 
     def shortPoll(self):
         pass
@@ -62,7 +36,7 @@ class Camera(Node):
         # 'cam_id': '96f69defdef1d0b6602a', 'cam_name': 'Out Front Door', 'detected_obj': ['person']}
         LOGGER.debug(f"{self.lpfx} type={event['type']}")
         if event['type'] == 'alert':
-            if 'detected_obj' in event:
+            if 'detected_obj' in DETECTED_OBJECT_MAP:
                 self.detected_obj(event['detected_obj'])
             else:
                 LOGGER.error(f"Unknown alert, no detected_obj in {event}")
@@ -71,13 +45,16 @@ class Camera(Node):
         LOGGER.debug(f"{self.lpfx} {object_list}")
         # Clear last detected objects
         # TODO: Would be better to timout and clear these during a short poll, but allow for user specified timeout?
-        for obj in OBJECT_MAP:
-            self.detected_obj_by_name[obj].clear()
+        for cat in DETECTED_OBJECT_MAP:
+            for otype in DETECTED_OBJECT_MAP[cat]:
+                self.detected_obj_by_type[obj].clear()
         # And set the current ones
         for obj in object_list:
-            if obj in OBJECT_MAP:
+            if obj in DETECTED_OBJECT_MAP:
                 LOGGER.debug(f"{self.lpfx} {obj}")
-                self.detected_obj_by_name[obj].turn_on()
+                self.setDriver('ALARM',1)
+                #self.setDriver('ALARM',DETECTED_OBJECT_MAP['obj'])
+                self.detected_obj_by_type[obj].turn_on(obj)
             else:
                 LOGGER.error(f"Unsupported detected object '{obj}'")
 
@@ -95,12 +72,37 @@ class Camera(Node):
     hint = [1,2,3,4]
     drivers = [
         {'driver': 'ST',  'value': 0, 'uom': 2}, # Enabled
-        {'driver': 'GV0', 'value': 0, 'uom': 2}, # Alerting
-        {'driver': 'GV1', 'value': 0, 'uom': 2}, # Streaming
-        {'driver': 'GV3', 'value': 0, 'uom': 2}, # Person
-        {'driver': 'GV4', 'value': 0, 'uom': 2}, # Dog
-        {'driver': 'GV5', 'value': 0, 'uom': 2}, # Car
-        {'driver': 'GV6', 'value': 0, 'uom': 2}, # Skunk
+        {'driver': 'ALARM', 'value': 0, 'uom': 2}, # Alerting
+        {'driver': 'MODE', 'value': 0, 'uom': 2}, # Alerting
+        {'driver': 'GPV', 'value': 0, 'uom': 2}, # Streaming
+        {'driver': 'GV0', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV1', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV2', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV3', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV4', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV5', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV6', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV7', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV8', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV9', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV10', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV11', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV12', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV13', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV14', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV15', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV16', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV17', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV18', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV19', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV20', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV21', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV22', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV23', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV24', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV25', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV26', 'value': 0, 'uom': 2}, # 
+        {'driver': 'GV27', 'value': 0, 'uom': 2}, # 
         ]
     id = 'camera'
     commands = {

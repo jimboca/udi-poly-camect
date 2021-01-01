@@ -25,7 +25,7 @@ The main controller node.
 
 - The Status shows:
   - Nodeserver Online: Nodeserver connected to Polyglot
-  - Camect Connected: Status of connection to your Camect
+  - Camect Connected: Status of connection to all your Camects
   - Logger Level: The current Logging level
 
 - The Controls available:
@@ -39,6 +39,13 @@ The main controller node.
 
 ![The Controller](pics/Controller.png)
 
+### Host
+
+A node is created for each Camect Host device.
+
+- The Satus shows:
+  - Camect Connected: Status of connection to your Camect
+
 ### Camera
 
 A node is created for each Camera. 
@@ -51,27 +58,32 @@ A node is created for each Camera.
   - Enabled: [Coming soon](https://github.com/jimboca/udi-poly-Camect/issues/1)
   - Alerting: [Coming soon](https://github.com/jimboca/udi-poly-Camect/issues/2)
 
-![A Camera Node](pics/Camera.png)
+![A Camera Node](pics/OutFrontDoor.png)
 
 ### Detected Object
 
-The Camera nodes all have a child node for each known detected object type by Camect.  For comments see [Allow user to control what time of objects they want to detect?](https://github.com/jimboca/udi-poly-Camect/issues/4)
-When the object is detected the ST is set to True and a DON is sent.  The status remains True until a different type of obejct is detected See: [Should timeout be set for detected object #3
-](https://github.com/jimboca/udi-poly-Camect/issues/3)
+The Camera nodes all have a child node for major type of object that can be detect; animal, human, insect, vehicle.  Each of those contain the object type by Camect.  
+When the object is detected the status for that objec is set to True and a DON is sent.  The status remains True until a different type of detection event is sent by Camect.
 
 - The Status Shows:
   - Detected: True when object has been detected
 
-![A Detected Object](pics/DetectedObject.png)
+![A Detected Animal Object](pics/OutFrontDoor_animal.png)
+![A Detected Human Object](pics/OutFrontDoor_human.png)
+![A Detected Insect Object](pics/OutFrontDoor_insect.png)
+![A Detected Vehicle Object](pics/OutFrontDoor_vehicle.png)
 
 #### How to use Detected Objects
 
 You can create a program to know when a Skunk enters your front yard ![Skunk Program](pics/ProgramSkunk.png)
 
-You can add the nodes to a scene to know when a Skunk enters the front yard ![Skunk Scene](pics/SceneSkunk.png)
+You can add the nodes to a scene to know when a Person shows up [Person Scene](pics/ScenePerson.png)
 
 ## Version History
 
+- 0.1.0
+  - __IMPORTANT__ If using previous version you should delete the nodeserver and add it again.
+  - Group detected objects by major types, person, vehicle, animal, insect
 - 0.0.4
   - Changed methods used to send DON so it's clear in the log
   - Fixed profile for Controller GV2 name

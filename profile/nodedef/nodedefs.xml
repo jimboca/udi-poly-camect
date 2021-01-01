@@ -24,13 +24,12 @@
             </accepts>
         </cmds>
     </nodeDef>
-	<!-- templatenodeid -->
-    <nodeDef id="camera" nls="camera">
+
+    <!-- templatenodeid -->
+    <nodeDef id="host" nls="host">
         <editors />
         <sts>
-            <st id="ST" editor="bool" /> <!-- Camera Enabled -->
-            <st id="GV0" editor="bool" /> <!-- Alerts Enabled -->
-            <st id="GV1" editor="bool" /> <!-- Streaming Enabled -->
+            <st id="ST" editor="bool" /> <!-- Camect Connected -->
         </sts>
         <cmds>
             <sends />
@@ -40,6 +39,177 @@
             </accepts>
         </cmds>
     </nodeDef>
+
+	<!-- Camera -->
+    <nodeDef id="camera" nls="camera">
+        <editors />
+        <sts>
+            <st id="ST"   editor="bool" /> <!-- Camera Enabled -->
+            <st id="ALARM" editor="I_OBJ" /> <!-- Object Detected -->
+            <st id="MODE" editor="bool" /> <!-- Alerts Enabled -->
+            <st id="GPV"  editor="bool" /> <!-- Streaming Enabled -->
+        </sts>
+        <cmds>
+            <sends />
+            <accepts>
+                <cmd id="DON" />
+                <cmd id="DOF" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+
+	<!-- Object: Human -->
+    <nodeDef id="human" nls="human">
+        <editors />
+        <sts>
+            <st id="GV0"  editor="bool" /> <!-- Person -->
+            <st id="GV1"  editor="bool" /> <!-- Santa Claus -->
+        </sts>
+        <cmds>
+            <sends>
+                <cmd id="DON" />
+                <cmd id="DOF" /> 
+                <cmd id="GV0" />
+                <cmd id="GV1" />
+            </sends>
+            <accepts>
+                <cmd id="DON" />
+                <cmd id="DOF" />
+                <cmd id="GV0" />
+                <cmd id="GV1" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+
+	<!-- Object: Vehicle -->
+    <nodeDef id="vehicle" nls="vehicle">
+        <editors />
+        <sts>
+            <st id="GV0"  editor="bool" /> <!-- Amazon -->
+            <st id="GV1"  editor="bool" /> <!-- UPS -->
+            <st id="GV2"  editor="bool" /> <!-- USPS-->
+            <st id="GV3"  editor="bool" /> <!-- Bicycle -->
+            <st id="GV4"  editor="bool" /> <!-- Bus-->
+            <st id="GV5"  editor="bool" /> <!-- Car -->
+            <st id="GV6"  editor="bool" /> <!-- DHL -->
+            <st id="GV7"  editor="bool" /> <!-- FedEx -->
+            <st id="GV8"  editor="bool" /> <!-- Motorcycle -->
+            <st id="GV9"  editor="bool" /> <!-- Pickup -->
+            <st id="GV10" editor="bool" /> <!-- Royal Mail -->
+            <st id="GV11" editor="bool" /> <!-- Truck -->
+        </sts>
+        <cmds>
+            <sends>
+                <cmd id="DON" />
+                <cmd id="DOF" /> 
+                <cmd id="GV0" />
+                <cmd id="GV1" />
+                <cmd id="GV2" />
+                <cmd id="GV3" />
+                <cmd id="GV4" />
+                <cmd id="GV5" />
+                <cmd id="GV6" />
+                <cmd id="GV7" />
+                <cmd id="GV8" />
+                <cmd id="GV9" />
+                <cmd id="GV10" />
+                <cmd id="GV11" />
+            </sends>
+            <accepts>
+                <cmd id="DON" />
+                <cmd id="DOF" />
+                <cmd id="GV0" />
+                <cmd id="GV1" />
+                <cmd id="GV2" />
+                <cmd id="GV3" />
+                <cmd id="GV4" />
+                <cmd id="GV5" />
+                <cmd id="GV6" />
+                <cmd id="GV7" />
+                <cmd id="GV8" />
+                <cmd id="GV9" />
+                <cmd id="GV10" />
+                <cmd id="GV11" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+
+	<!-- Camera -->
+    <nodeDef id="animal" nls="animal">
+        <editors />
+        <sts>
+            <st id="GV0"  editor="bool" /> <!-- Bear -->
+            <st id="GV1"  editor="bool" /> <!-- Bird -->
+            <st id="GV2"  editor="bool" /> <!-- Cat -->
+            <st id="GV3"  editor="bool" /> <!-- Deer -->
+            <st id="GV4"  editor="bool" /> <!-- Dog -->
+            <st id="GV5"  editor="bool" /> <!-- Mouse -->
+            <st id="GV6"  editor="bool" /> <!-- Rabbit -->
+            <st id="GV7"  editor="bool" /> <!-- Raccoon -->
+            <st id="GV8"  editor="bool" /> <!-- Skunk -->
+            <st id="GV9"  editor="bool" /> <!-- Squirrel -->
+            <st id="GV10" editor="bool" /> <!-- Unknown Animal -->
+            <st id="GV11" editor="bool" /> <!-- Unknown Small Animal -->
+        </sts>
+        <cmds>
+            <sends>
+                <cmd id="DON" />
+                <cmd id="DOF" />
+                <cmd id="GV0" />
+                <cmd id="GV1" />
+                <cmd id="GV2" />
+                <cmd id="GV3" />
+                <cmd id="GV4" />
+                <cmd id="GV5" />
+                <cmd id="GV6" />
+                <cmd id="GV7" />
+                <cmd id="GV8" />
+                <cmd id="GV9" />
+                <cmd id="GV10" />
+                <cmd id="GV11" />
+            </sends>
+            <accepts>
+                <cmd id="DON" />
+                <cmd id="DOF" />
+                <cmd id="GV0" />
+                <cmd id="GV1" />
+                <cmd id="GV2" />
+                <cmd id="GV3" />
+                <cmd id="GV4" />
+                <cmd id="GV5" />
+                <cmd id="GV6" />
+                <cmd id="GV7" />
+                <cmd id="GV8" />
+                <cmd id="GV9" />
+                <cmd id="GV10" />
+                <cmd id="GV11" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+
+	<!-- Object: Insect -->
+    <nodeDef id="insect" nls="insect">
+        <editors />
+        <sts>
+            <st id="GV0" editor="bool" /> <!-- Fly -->
+            <st id="GV1" editor="bool" /> <!-- Spider -->
+        </sts>
+        <cmds>
+            <sends>
+                <cmd id="DON" />
+                <cmd id="DOF" />
+                <cmd id="GV0" />
+                <cmd id="GV1" />
+            </sends>
+            <accepts>
+                <cmd id="DON" />
+                <cmd id="DOF" />
+                <cmd id="GV0" />
+                <cmd id="GV1" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+
 	<!-- templatenodeid -->
     <nodeDef id="objdet" nls="objdet">
         <editors />
