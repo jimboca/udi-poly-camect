@@ -30,7 +30,7 @@ The main controller node.
 
 - The Controls available:
   - Logger Level
-      Usually set to Warning, unless you are debugging issues and want to see all information, but this will use up a lot of disk space. 
+      Usually set to Warning, unless you are debugging issues and want to see all information, but this will use up a lot of disk space.
     - Debug + Modules: All Debug including referenced modules
     - Debug
     - Info
@@ -48,7 +48,7 @@ A node is created for each Camect Host device.
 
 ### Camera
 
-A node is created for each Camera. 
+A node is created for each Camera.
 
 - The Status shows:
   - Enabled: If the Camera is enabled

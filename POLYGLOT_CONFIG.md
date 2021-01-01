@@ -7,9 +7,4 @@ You must set the following:
 - user: The Camect local user.
 - password: The Camect local user password
 
-As noted in the [Camect Python client library](https://github.com/camect/camect-py/blob/master/README.md) Please open https://local.home.camect.com/ in browser, sign in as admin and accept TOS before you proceed.  [Use a different user besides admin?](https://github.com/jimboca/udi-poly-Camect/issues/5)
-
-
-
-
-
+As noted in the [Camect Python client library](https://github.com/camect/camect-py/blob/master/README.md) Please open [Local Camect](https://local.home.camect.com/) in browser, sign in as admin and accept TOS before you proceed.  [Use a different user besides admin?](https://github.com/jimboca/udi-poly-Camect/issues/5)
