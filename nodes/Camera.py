@@ -47,7 +47,7 @@ class Camera(Node):
         # TODO: Would be better to timout and clear these during a short poll, but allow for user specified timeout?
         for cat in DETECTED_OBJECT_MAP:
             for otype in DETECTED_OBJECT_MAP[cat]:
-                self.detected_obj_by_type[obj].clear()
+                self.detected_obj_by_type[otype].clear()
         # And set the current ones
         for obj in object_list:
             if obj in DETECTED_OBJECT_MAP:
