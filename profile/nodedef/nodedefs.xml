@@ -52,6 +52,9 @@
         <cmds>
             <sends />
             <accepts>
+                <!-- <cmd id="SET_ENABLE">
+                    <p id="" editor="bool" init="MODE" />
+                </cmd> -->
                 <cmd id="DON" />
                 <cmd id="DOF" />
             </accepts>

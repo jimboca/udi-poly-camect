@@ -101,6 +101,13 @@ class Host(Node):
         if not found:
             cameras.append({'name': cam['name'], 'id': cam['id'], 'host': cam['ip_addr'], 'detect': 'None'})
         
+    def enable_alert(self, cam_id):
+        LOGGER.info(f"{cam_id}")
+        return self.camect.enable_alert(cam_id,"nodeserver")
+
+    def disable_alert(self, cam_id):
+        LOGGER.info(f"{cam_id}")
+        return self.camect.disable_alert(cam_id,"nodeserver")
 
     def delete(self):
         LOGGER.info('Oh God I\'m being deleted. Nooooooooooooooooooooooooooooooooooooooooo.')

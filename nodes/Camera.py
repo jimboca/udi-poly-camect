@@ -50,7 +50,7 @@ class Camera(Node):
                 self.detected_obj_by_type[otype].clear()
         # And set the current ones
         for obj in object_list:
-            if obj in DETECTED_OBJECT_MAP:
+            if obj in self.detected_obj_by_type:
                 LOGGER.debug(f"{self.lpfx} {obj}")
                 self.setDriver('ALARM',1)
                 #self.setDriver('ALARM',DETECTED_OBJECT_MAP['obj'])
@@ -58,13 +58,25 @@ class Camera(Node):
             else:
                 LOGGER.error(f"Unsupported detected object '{obj}'")
 
-    def cmd_on(self, command):
-        self.controller.enable_alert(self.cam['id'])
-        self.setDriver('GV0', 1)
+    def cmd_alert_on(self, command):
+        LOGGER.info("")
+        st = self.host.enable_alert(self.cam['id'])
+        self.setDriver('MODE', 1)
 
-    def cmd_off(self, command):
-        self.controller.disable_alert(self.cam['id'])
-        self.setDriver('GV0', 0)
+    def cmd_alert_off(self, command):
+        LOGGER.info("")
+        st = self.host.disable_alert(self.cam['id'])
+        self.setDriver('MODE', 0)
+
+    def cmd_enable_on(self, command):
+        #self.controller.enable_alert(self.cam['id'])
+        #self.setDriver('GV0', 1)
+        pass
+
+    def cmd_enable_off(self, command):
+        #self.controller.disable_alert(self.cam['id'])
+        #self.setDriver('GV0', 0)
+        pass
 
     def query(self,command=None):
         self.reportDrivers()
@@ -72,7 +84,7 @@ class Camera(Node):
     hint = [1,2,3,4]
     drivers = [
         {'driver': 'ST',  'value': 0, 'uom': 2}, # Enabled
-        {'driver': 'ALARM', 'value': 0, 'uom': 2}, # Alerting
+        {'driver': 'ALARM', 'value': 0, 'uom': 2}, # Detected
         {'driver': 'MODE', 'value': 0, 'uom': 2}, # Alerting
         {'driver': 'GPV', 'value': 0, 'uom': 2}, # Streaming
         {'driver': 'GV0', 'value': 0, 'uom': 2}, # 
@@ -106,6 +118,8 @@ class Camera(Node):
         ]
     id = 'camera'
     commands = {
-                    'DON': cmd_on,
-                    'DOF': cmd_off,
+                    'DON': cmd_alert_on,
+                    'DOF': cmd_alert_off,
+                    'SET_DISABLE_ON': cmd_enable_on,
+                    'SET_DISABLE_OFF': cmd_enable_off,
                 }

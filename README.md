@@ -81,6 +81,8 @@ You can add the nodes to a scene to know when a Person shows up [Person Scene](p
 
 ## Version History
 
+- 0.1.1
+  - Enable/Disable Alerting working
 - 0.1.0
   - __IMPORTANT__ If using previous version you should delete the nodeserver and add it again.
   - Group detected objects by major types, person, vehicle, animal, insect
