@@ -9,4 +9,10 @@
     <editor id="I_OBJ">
       <range uom="25" min="0" max="28" nls="OBJ"/>
     </editor>
+    <editor id="I_HMODE">
+      <range uom="25" subset="0-1" nls="HMODE"/>
+    </editor>
+    <editor id="I_HMODEM">
+      <range uom="25" subset="-1,0-1" nls="HMODE"/>
+    </editor>
 </editors>

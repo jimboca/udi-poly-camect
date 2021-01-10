@@ -1,9 +1,11 @@
 
-from polyinterface import Node,LOGGER
+from nodes.BaseNode import BaseNode
+from polyinterface import LOGGER
+from nodes import BaseNode
 from node_funcs import id_to_address,get_valid_node_name
 from const import DETECTED_OBJECT_MAP
 
-class DetectedObject(Node):
+class DetectedObject(BaseNode):
     id = 'objdet' # Placeholder, gets overwritten in __init__
     drivers = [
         {'driver': 'ST',  'value': 0, 'uom': 2}, # Enabled
@@ -12,10 +14,10 @@ class DetectedObject(Node):
     def __init__(self, controller, primary, otype):
         self.id = otype
         self.map = DETECTED_OBJECT_MAP[otype]
-        address = f'{primary.address}{otype[:1]}'
+        LOGGER.debug(f"Adding DetectedObject {otype} for {primary.address}:{primary.name}")
+        address = f'{primary.address}_{otype}'[:14]
         name    = f'{primary.name} {otype}'
         super(DetectedObject, self).__init__(controller, primary.address, address, name)
-        self._mydrivers = {}
         self.dname_to_driver = {}
         self.lpfx = '%s:%s' % (self.address,self.name)
         for obj_name in self.map:
@@ -26,9 +28,9 @@ class DetectedObject(Node):
 
     def start(self):
         LOGGER.debug(f'{self.lpfx}')
-        self.setDriver('ST',0)
+        self.set_driver('ST',0)
         for dn in self.dname_to_driver:
-            self.setDriver(self.dname_to_driver[dn], 0)
+            self.set_driver(self.dname_to_driver[dn], 0)
 
     def shortPoll(self):
         pass
@@ -66,15 +68,6 @@ class DetectedObject(Node):
     def query(self,command=None):
         LOGGER.debug(f'{self.lpfx}')
         self.reportDrivers()
-
-    def set_driver(self,drv,val):
-        self._mydrivers[drv] = val
-        self.setDriver(drv,val)
-
-    def get_driver(self,drv):
-        if drv in self._mydrivers:
-            return self._mydrivers[drv]
-        return self.getDriver(drv)
 
     hint = [1,2,3,4]
     commands = {

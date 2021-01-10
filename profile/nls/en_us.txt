@@ -8,6 +8,8 @@ CMD-ctl-SET_DM-NAME = Set Logger Level
 ST-ctl-ST-NAME = NodeServer Online
 ST-ctl-GV1-NAME = Logger Level
 ST-ctl-GV2-NAME = Camect Connected
+ST-ctl-MODE-NAME = Mode
+CMD-ctl-SET_MODE-NAME = Set Mode
 
 # Debug/Logger Modes
 CDM-9 = Debug + Modules
@@ -21,8 +23,10 @@ CDM-50 = Critical
 # Camect Host
 #
 ND-host-NAME = Camect Host
+CMD-host-DISCOVER-NAME = Discover
 ST-host-ST-NAME = Camect Connected
-
+ST-host-MODE-NAME = Mode
+CMD-host-SET_MODE-NAME = Set Mode
 
 #
 # Camera
@@ -33,8 +37,46 @@ CMD-camera-DON-NAME = Enable Alert
 CMD-camera-DOF-NAME = Disable Alert
 CMD-camera-SET_ALERT-NAME = Set Alerting
 ST-camera-ALARM-NAME = Object Detected
-ST-camera-MODE-NAME = Alerting
 ST-camera-GPV-NAME = Streaming
+
+HMODE--1 = Mixed
+HMODE-0 = Default
+HMODE-1 = Home
+
+#
+# The Object detected
+#
+ST-camera-ALARM-NAME = Detected Object
+OBJ-0 = None
+OBJ-1 = Santa Claus
+OBJ-2 = Amazon
+OBJ-3 = DHL
+OBJ-4 = FedEx
+OBJ-5 = RoyalMail
+OBJ-6 = UPS truck
+OBJ-7 = USPS
+OBJ-8 = bear
+OBJ-9 = bicycle
+OBJ-10 = bird
+OBJ-11 = bus
+OBJ-12 = car
+OBJ-13 = cat
+OBJ-14 = deer
+OBJ-15 = dog
+OBJ-15 = motorcycle
+OBJ-17 = mouse
+OBJ-18 = person
+OBJ-19 = pickup
+OBJ-20 = rabbit
+OBJ-21 = raccoon
+OBJ-22 = skunk
+OBJ-23 = squirrel
+OBJ-24 = truck
+OBJ-25 = unknown animal
+OBJ-26 = unknown small animal
+OBJ-27 = fly
+OBJ-28 = spider
+OBJ-29 = person and dog
 
 #
 # Object: Human
@@ -75,7 +117,7 @@ CMD-vehicle-GV11-NAME = Truck
 #
 # Object: Animal
 #
-ND-animal-NAME = Human Detection
+ND-animal-NAME = Animal Detection
 ST-animal-GV0-NAME = Bear
 ST-animal-GV1-NAME = Bird
 ST-animal-GV2-NAME = Cat
@@ -103,44 +145,11 @@ CMD-animal-GV11-NAME = Unknown Small Animal
 #
 # Object: Insect
 #
-ND-insect-NAME = Human Detection
+ND-insect-NAME = Insect Detection
 ST-insect-GV0-NAME = Fly
 ST-insect-GV1-NAME = Spider
 CMD-insect-GV0-NAME = Fly
 CMD-insect-GV1-NAME = Spider
-
-
-ST-camera-ALARM-NAME = Detected Object
-OBJ-0 = None
-OBJ-1 = Santa Claus
-OBJ-2 = Amazon
-OBJ-3 = DHL
-OBJ-4 = FedEx
-OBJ-5 = RoyalMail
-OBJ-6 = UPS truck
-OBJ-7 = USPS
-OBJ-8 = bear
-OBJ-9 = bicycle
-OBJ-10 = bird
-OBJ-11 = bus
-OBJ-12 = car
-OBJ-13 = cat
-OBJ-14 = deer
-OBJ-15 = dog
-OBJ-15 = motorcycle
-OBJ-17 = mouse
-OBJ-18 = person
-OBJ-19 = pickup
-OBJ-20 = rabbit
-OBJ-21 = raccoon
-OBJ-22 = skunk
-OBJ-23 = squirrel
-OBJ-24 = truck
-OBJ-25 = unknown animal
-OBJ-26 = unknown small animal
-OBJ-27 = fly
-OBJ-28 = spider
-OBJ-29 = person and dog
 
 #
 # Object Detected, not used anymore

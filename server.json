@@ -6,15 +6,15 @@
     "install": "install.sh",
     "description": "Camect Node Server",
     "notice": "Not responsible for anything",
-    "shortPoll": "120",
-    "longPoll": "240",
+    "shortPoll": "30",
+    "longPoll": "300",
     "testMode": false,
-    "profile_version": "0.1.1",
+    "profile_version": "0.2.0",
     "credits": [
         {
             "title": "camect: a NodeServer for Camect Integration",
             "author": "Jim Searle (JimBoCA)",
-            "version": "0.1.1",
+            "version": "0.2.0",
             "date": "December 13, 2020",
             "source": "https://github.com/jimboca/udi-poly-Camect",
             "license": "https://raw.githubusercontent.com/jimboca/udi-poly-Camect/master/LICENSE"

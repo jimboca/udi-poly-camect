@@ -1,35 +1,39 @@
 
-from polyinterface import Node,LOGGER
+from polyinterface import LOGGER
 from node_funcs import id_to_address,get_valid_node_name
-from nodes import DetectedObject
+from nodes import BaseNode,DetectedObject
 from const import DETECTED_OBJECT_MAP
 
-class Camera(Node):
-    def __init__(self, controller, host, num, cam=None):
+class Camera(BaseNode):
+    def __init__(self, controller, host, address, cam):
+        self.ready = False
         #print("%s(%s) @%s(%s)" % (cam["name"], cam["make"], cam["ip_addr"], cam["mac_addr"]))
         self.host = host
         self.cam = cam
         self.detected_obj_by_type = {}
-        address = self.host.camect.get_id()[:9] + f'{int(num):02d}'
         super(Camera, self).__init__(controller, address, address, get_valid_node_name(cam['name']))
         self.lpfx = '%s:%s' % (self.address,self.name)
 
     def start(self):
-        self.setDriver('ST',0  if self.cam['disabled']          else 1)
-        self.setDriver('MODE',0 if self.cam['is_alert_disabled'] else 1)
-        self.setDriver('GPV', 1 if self.cam['is_streaming']      else 0)
-        self.setDriver('ALARM',0)
+        LOGGER.debug(f'{self.lpfx} Starting...')
+        self.update_status(self.cam)
+        self.set_driver('ALARM',0)
         for cat in DETECTED_OBJECT_MAP:
             node = self.controller.addNode(DetectedObject(self.controller, self, cat))
             # Keep track of which node handles which detected object type.
             for otype in DETECTED_OBJECT_MAP[cat]:
                 self.detected_obj_by_type[otype] = node
+        LOGGER.debug(f'{self.lpfx} Done...')
+        self.ready = True
 
-    def shortPoll(self):
-        pass
-
-    def longPoll(self):
-        pass
+    def update_status(self,cam):
+        """
+        Given a cam dict from the Camcect API update all our drivers
+        """
+        LOGGER.debug(f"{self.lpfx}: disabled={cam['disabled']} is_alert_disabled={cam['is_alert_disabled']} is_streaming={cam['is_streaming']}")
+        self.set_driver('ST',0   if cam['disabled']           else 1)
+        self.set_driver('MODE',0 if cam['is_alert_disabled']  else 1)
+        self.set_driver('GPV', 1 if cam['is_streaming']       else 0)
 
     def callback(self,event):
         # {'type': 'alert', 'desc': 'Out Front Door just saw a person.', 'url': 'https://home.camect.com/home/...', 
@@ -47,13 +51,16 @@ class Camera(Node):
         # TODO: Would be better to timout and clear these during a short poll, but allow for user specified timeout?
         for cat in DETECTED_OBJECT_MAP:
             for otype in DETECTED_OBJECT_MAP[cat]:
-                self.detected_obj_by_type[otype].clear()
+                if otype in self.detected_obj_by_type:
+                    self.detected_obj_by_type[otype].clear()
+                else:
+                    LOGGER.error(f"Internal error, no {otype} in dectected_obj_by_type dict?")
         # And set the current ones
         for obj in object_list:
             if obj in self.detected_obj_by_type:
                 LOGGER.debug(f"{self.lpfx} {obj}")
-                self.setDriver('ALARM',1)
-                #self.setDriver('ALARM',DETECTED_OBJECT_MAP['obj'])
+                self.set_driver('ALARM',1)
+                #self.set_driver('ALARM',DETECTED_OBJECT_MAP['obj'])
                 self.detected_obj_by_type[obj].turn_on(obj)
             else:
                 LOGGER.error(f"Unsupported detected object '{obj}'")
@@ -61,21 +68,21 @@ class Camera(Node):
     def cmd_alert_on(self, command):
         LOGGER.info("")
         st = self.host.enable_alert(self.cam['id'])
-        self.setDriver('MODE', 1)
+        self.set_driver('MODE', 1)
 
     def cmd_alert_off(self, command):
         LOGGER.info("")
         st = self.host.disable_alert(self.cam['id'])
-        self.setDriver('MODE', 0)
+        self.set_driver('MODE', 0)
 
     def cmd_enable_on(self, command):
         #self.controller.enable_alert(self.cam['id'])
-        #self.setDriver('GV0', 1)
+        #self.set_driver('GV0', 1)
         pass
 
     def cmd_enable_off(self, command):
         #self.controller.disable_alert(self.cam['id'])
-        #self.setDriver('GV0', 0)
+        #self.set_driver('GV0', 0)
         pass
 
     def query(self,command=None):
@@ -84,7 +91,7 @@ class Camera(Node):
     hint = [1,2,3,4]
     drivers = [
         {'driver': 'ST',  'value': 0, 'uom': 2}, # Enabled
-        {'driver': 'ALARM', 'value': 0, 'uom': 2}, # Detected
+        {'driver': 'ALARM', 'value': 0, 'uom': 25}, # Detected
         {'driver': 'MODE', 'value': 0, 'uom': 2}, # Alerting
         {'driver': 'GPV', 'value': 0, 'uom': 2}, # Streaming
         {'driver': 'GV0', 'value': 0, 'uom': 2}, # 

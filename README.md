@@ -17,7 +17,11 @@ This has been tested on an RPI running the latest Buster release and the Polisy.
 
 ## Using this Nodeserver
 
-After configuring you should get a Node for each Camera, and under each Camera an ObjectDetected node for each type of object currently detected by Camect.
+After configuring and restarting you should get a Node for each Camect Host, each Camera that is enabled on that host, and each Camera has mltiple ObjectDetected nodes for the type of objects currently detected by Camect.  
+
+To clarify, make sure when you restart after setting the configuration data that all cameras you want added to the ISY are enabled in Camect, if you have cameras off in HOme Mode, make sure all Camects are in Default Mode.  The reason for this is when you have multiple Camect devices all cameras show up in each Camect device so the disabled ones are the ones in use for that device.  Hopefully someday Camect will add settings to control this better...  To add them later you must do a discover on the Camect Host node individually.
+
+On restarts all known Camect hosts and cameras are added, it does not check for newly added cameras unless you run discover on a camera host by selecing it in the admin console and clicking discover.  If a new Camect host has been added since last restart or discover on the controller, then that host and all it's enabled cameras will be added to the ISY.
 
 ### Controller
 
@@ -45,6 +49,8 @@ A node is created for each Camect Host device.
 
 - The Satus shows:
   - Camect Connected: Status of connection to your Camect
+
+The discover command is used when you add or enable a camera on a Camect then run discover and the new cameras will be added.
 
 ### Camera
 
@@ -81,6 +87,14 @@ You can add the nodes to a scene to know when a Person shows up [Person Scene](p
 
 ## Version History
 
+- 0.2.0:
+  - __IMPORTANT__ If using previous version you should delete the nodeserver and add it again.
+    - Should be the last time, all address are unique and remembered so can not be duplicated
+  - Discover is only run by default on initial startup
+  - Camera's are remembered, so on restarts a discover is not run.
+    - See notes in about when new cameras are discovered
+  - Add selecting mode on Camect Host
+  - Add selecting mode on Controller to set all host modes
 - 0.1.1
   - Enable/Disable Alerting working
 - 0.1.0
