@@ -2,7 +2,7 @@
 
 This is a Polyglot Nodeserver for the [Universal Devices](https://www.universal-devices.com/) ISY to integrate the [Camect](http://camect.com) System.
 
-This is the initial version so it may change drastically but you are welcome to test and give feedback.
+This is the initial released version so it may change drastically but hopefully not.
 
 ## Installation
 
@@ -10,7 +10,7 @@ Install from the Polyglot Store.  See [Configuration](POLYGLOT_CONFIG.md) on the
 
 ## Requirements
 
-This has been tested on an RPI running the latest Buster release and the Polisy.  
+This has been tested on an RPI running the latest Buster release and the Polisy with all updates.  
 
 - You must have Python verison 3.6 or newer.
 - This uses the [Camect Python Library](https://github.com/camect/camect-py)
