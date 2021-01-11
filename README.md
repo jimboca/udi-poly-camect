@@ -17,9 +17,16 @@ This has been tested on an RPI running the latest Buster release and the Polisy 
 
 ## Using this Nodeserver
 
-After configuring and restarting you should get a Node for each Camect Host, each Camera that is enabled on that host, and each Camera has mltiple ObjectDetected nodes for the macor types of objects currently detected by Camect, person, vehicle, animal, insect. 
+After configuring and restarting you should get a Node
+- Each Camect Host
+- Each Camera that is enabled on the Camect hosts
+- Each Camera has mltiple ObjectDetected nodes for the major types of objects currently detected by Camect
+  - person
+  - vehicle
+  - animal
+  - insect 
 
-To clarify, make sure when you restart after setting the configuration data that all cameras you want added to the ISY are enabled in Camect, if you have cameras off in Home Mode, make to enable Default Mode.  The reason for this is when you have multiple Camect devices all cameras show up in each Camect device so we dont' wan tthe disabled ones to show up.  Hopefully someday Camect will add settings to control this better...  To add them later you must do a discover on the Camect Host node individually.
+To clarify, make sure when you restart after setting the configuration data that all cameras you want added to the ISY are enabled in Camect. If you have cameras off in Home Mode, then make sure to enable Default Mode.  The reason for this is when you have multiple Camect devices all cameras show up in each Camect device so we don't want the disabled ones to show up.  Hopefully someday Camect will add settings to control this better...  To add them later you must do a discover on the Camect Host node individually.
 
 On restarts all known Camect hosts and cameras are added, it does not check for newly added cameras unless you run discover on a Camect host by selecing it in the admin console and clicking discover.  If a new Camect host has been added since last restart or discover on the controller, then that host and all it's enabled cameras will be added to the ISY.  Make sure if your discover on a Camect Host that all Cameras you want to control in the ISY are enabled.  If there are some in the ISY and are disabled when you run discover, they will no longer be connected to the ISY, so be careful.
 
