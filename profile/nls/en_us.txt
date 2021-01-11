@@ -7,7 +7,8 @@ CMD-ctl-UPDATE_PROFILE-NAME = Update Profile
 CMD-ctl-SET_DM-NAME = Set Logger Level
 ST-ctl-ST-NAME = NodeServer Online
 ST-ctl-GV1-NAME = Logger Level
-ST-ctl-GV2-NAME = Camect Connected
+ST-ctl-GV2-NAME = Camects Configured
+ST-ctl-GV3-NAME = Camects Connected
 ST-ctl-MODE-NAME = Mode
 CMD-ctl-SET_MODE-NAME = Set Mode
 
@@ -28,6 +29,11 @@ ST-host-ST-NAME = Camect Connected
 ST-host-MODE-NAME = Mode
 CMD-host-SET_MODE-NAME = Set Mode
 
+HMODE--1 = Mixed
+HMODE-0 = Default
+HMODE-1 = Home
+
+
 #
 # Camera
 #
@@ -38,15 +44,16 @@ CMD-camera-DOF-NAME = Disable Alert
 CMD-camera-SET_ALERT-NAME = Set Alerting
 ST-camera-ALARM-NAME = Object Detected
 ST-camera-GPV-NAME = Streaming
-
-HMODE--1 = Mixed
-HMODE-0 = Default
-HMODE-1 = Home
+ST-camera-MODE-NAME = Alerting
 
 #
 # The Object detected
 #
 ST-camera-ALARM-NAME = Detected Object
+#
+# Below OBJ is not currently used, because any combination of all
+# objects can be detected at the same time, so it's not usable
+# Changed to just use boolean at camera level
 OBJ-0 = None
 OBJ-1 = Santa Claus
 OBJ-2 = Amazon

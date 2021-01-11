@@ -17,6 +17,7 @@ class CamectController(Controller):
         self.name = 'Camect Controller'
         self.hb = 0
         self.nodes_by_id = {}
+        self.hosts_connected = 0
         # Cross reference of host and camera id's to their node.
         self.__modifiedCustomData = False
         self.__my_drivers = {}
@@ -36,6 +37,8 @@ class CamectController(Controller):
         # Show values on startup if desired.
         LOGGER.debug('ST=%s',self.getDriver('ST'))
         self.set_driver('ST', 1)
+        self.set_hosts_configured()
+        self.set_hosts_connected()
         self.heartbeat()
         self.check_params()
         self.set_debug_level()
@@ -51,12 +54,13 @@ class CamectController(Controller):
             self.customData['next_cam']      = self.next_cam
             self.saveCustomData(self.customData)
             self.__modifiedCustomData = False
-        else:
-            LOGGER.debug("No save necessary")
+        #else:
+        #    LOGGER.debug("No save necessary")
 
     def shortPoll(self):
         LOGGER.debug('')
         self.save_custom_data()
+        self.set_hosts_connected()
         # Call shortpoll on the camect hosts
         for id,node in self.nodes_by_id.items():
             node.shortPoll()
@@ -135,6 +139,10 @@ class CamectController(Controller):
                         LOGGER.error('Failed to add camect host {host}',exc_info=True)
                         return
         self.save_custom_data()
+        if self.hosts is None:
+            self.set_driver('GV2',0)
+        else:
+            self.set_driver('GV2',len(self.hosts))
         self.set_mode_all()
         LOGGER.info('completed')
 
@@ -151,6 +159,8 @@ class CamectController(Controller):
         except:
             LOGGER.error(f'Failed to connect to camect host {host}',exc_info=True)
             return False
+        self.hosts_connected += 1
+        self.set_hosts_connected()
         LOGGER.info(f'Camect Name={camect_obj.get_name()}')
         LOGGER.debug(f'Camect Info={camect_obj.get_info()}')
         return camect_obj
@@ -202,7 +212,17 @@ class CamectController(Controller):
         # What does config represent?
         #LOGGER.info("process_config: Enter config={}".format(config))
         self.hosts = config.get('typedCustomData').get('hosts')
+        self.set_hosts_configured()
         #LOGGER.info("process_config: Exit");
+
+    def set_hosts_configured(self):
+        if self.hosts is None:
+            self.set_driver('GV2',0)
+        else:
+            self.set_driver('GV2',len(self.hosts))
+
+    def set_hosts_connected(self):
+        self.set_driver('GV3', self.hosts_connected)
 
     def set_module_logs(self,level):
         logging.getLogger('urllib3').setLevel(level)
@@ -336,7 +356,6 @@ class CamectController(Controller):
     def get_driver(self,mdrv):
         return self.__my_drivers[mdrv] if mdrv in self.__my_drivers else None
 
-
     def cmd_update_profile(self,command):
         LOGGER.info('update_profile:')
         st = self.poly.installprofile()
@@ -364,7 +383,9 @@ class CamectController(Controller):
         'SET_MODE': cmd_set_mode
 }
     drivers = [
-        {'driver': 'ST', 'value': 1, 'uom': 2}, 
-        {'driver': 'GV1', 'value': 10, 'uom': 25}, # Debug (Log) Mode, default=30=Warning
-        {'driver': 'MODE', 'value': 0, 'uom': 25}, # Host Mode of all Hosts
+        {'driver': 'ST',   'value':  1, 'uom': 2}, 
+        {'driver': 'GV1',  'value': 10, 'uom': 25}, # Debug (Log) Mode, default=30=Warning
+        {'driver': 'MODE', 'value':  0, 'uom': 25}, # Host Mode of all Hosts
+        {'driver': 'GV2',  'value':  0, 'uom': 25}, # Camects Configured
+        {'driver': 'GV3',  'value':  0, 'uom': 25}, # Camects Connected
     ]

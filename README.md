@@ -17,11 +17,11 @@ This has been tested on an RPI running the latest Buster release and the Polisy.
 
 ## Using this Nodeserver
 
-After configuring and restarting you should get a Node for each Camect Host, each Camera that is enabled on that host, and each Camera has mltiple ObjectDetected nodes for the type of objects currently detected by Camect.  
+After configuring and restarting you should get a Node for each Camect Host, each Camera that is enabled on that host, and each Camera has mltiple ObjectDetected nodes for the macor types of objects currently detected by Camect, person, vehicle, animal, insect. 
 
-To clarify, make sure when you restart after setting the configuration data that all cameras you want added to the ISY are enabled in Camect, if you have cameras off in HOme Mode, make sure all Camects are in Default Mode.  The reason for this is when you have multiple Camect devices all cameras show up in each Camect device so the disabled ones are the ones in use for that device.  Hopefully someday Camect will add settings to control this better...  To add them later you must do a discover on the Camect Host node individually.
+To clarify, make sure when you restart after setting the configuration data that all cameras you want added to the ISY are enabled in Camect, if you have cameras off in Home Mode, make to enable Default Mode.  The reason for this is when you have multiple Camect devices all cameras show up in each Camect device so we dont' wan tthe disabled ones to show up.  Hopefully someday Camect will add settings to control this better...  To add them later you must do a discover on the Camect Host node individually.
 
-On restarts all known Camect hosts and cameras are added, it does not check for newly added cameras unless you run discover on a camera host by selecing it in the admin console and clicking discover.  If a new Camect host has been added since last restart or discover on the controller, then that host and all it's enabled cameras will be added to the ISY.
+On restarts all known Camect hosts and cameras are added, it does not check for newly added cameras unless you run discover on a Camect host by selecing it in the admin console and clicking discover.  If a new Camect host has been added since last restart or discover on the controller, then that host and all it's enabled cameras will be added to the ISY.  Make sure if your discover on a Camect Host that all Cameras you want to control in the ISY are enabled.  If there are some in the ISY and are disabled when you run discover, they will no longer be connected to the ISY, so be careful.
 
 ### Controller
 
@@ -29,10 +29,17 @@ The main controller node.
 
 - The Status shows:
   - Nodeserver Online: Nodeserver connected to Polyglot
-  - Camect Connected: Status of connection to all your Camects
+  - Mode: The Mode of all camects
+    - Default - All Camects in Default Mode
+    - Home - All Camects in Home Mode
+    - Mixed - Mixutre of Home/Default
+  - Comects Configured: Number of Camect Hosts configured
+  - Camects Connected: Number of Camect Hosts connected
   - Logger Level: The current Logging level
 
 - The Controls available:
+  - Set Mode:
+    - Set All Camect Hosts to Default or Away Mode.
   - Logger Level
       Usually set to Warning, unless you are debugging issues and want to see all information, but this will use up a lot of disk space.
     - Debug + Modules: All Debug including referenced modules
@@ -49,8 +56,17 @@ A node is created for each Camect Host device.
 
 - The Satus shows:
   - Camect Connected: Status of connection to your Camect
+  - Mode: The Mode of the Camect
+    - Default
+    - Home
 
-The discover command is used when you add or enable a camera on a Camect then run discover and the new cameras will be added.
+- The Controls available:
+  - Set Mode:
+    - Set the Camect to Default or Away Mode.
+
+The discover command is used when you add or enable a camera on a Camect then run discover and the new cameras will be added.  Make sure the cameras you have/want in the ISY are enabled in the Camect interface before runnign discover.
+
+![A Host Node](pics/Host.png)
 
 ### Camera
 
@@ -64,12 +80,14 @@ A node is created for each Camera.
   - Enabled: [Coming soon](https://github.com/jimboca/udi-poly-Camect/issues/1)
   - Alerting: [Coming soon](https://github.com/jimboca/udi-poly-Camect/issues/2)
 
+Note that Alerting is updated immediatly from the Camect API when it is changed, however Enabled and Streaming are not so they are updated on every short poll.  Hopefully Camect will add callbacks for these funcitons in the future.
+
 ![A Camera Node](pics/OutFrontDoor.png)
 
 ### Detected Object
 
-The Camera nodes all have a child node for major type of object that can be detect; animal, human, insect, vehicle.  Each of those contain the object type by Camect.  
-When the object is detected the status for that objec is set to True and a DON is sent.  The status remains True until a different type of detection event is sent by Camect.
+The Camera nodes all have a child node for major type of object that can be detect; animal, human, insect, vehicle.  Each of those contain the detailed object type by Camect.  
+When the object is detected the status for that object is set to True and a DON is sent to the ndoe.  The status remains True until a different type of detection event is sent by Camect.
 
 - The Status Shows:
   - Detected: True when object has been detected
@@ -87,6 +105,9 @@ You can add the nodes to a scene to know when a Person shows up [Person Scene](p
 
 ## Version History
 
+- 0.2.1:
+  - __IMPORTANT__ Delete NS if running version prior to 0.2.0 !
+  - Added count of Camect's Configured and Connected in Controller
 - 0.2.0:
   - __IMPORTANT__ If using previous version you should delete the nodeserver and add it again.
     - Should be the last time, all address are unique and remembered so can not be duplicated

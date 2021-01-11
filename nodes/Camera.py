@@ -91,7 +91,7 @@ class Camera(BaseNode):
     hint = [1,2,3,4]
     drivers = [
         {'driver': 'ST',  'value': 0, 'uom': 2}, # Enabled
-        {'driver': 'ALARM', 'value': 0, 'uom': 25}, # Detected
+        {'driver': 'ALARM', 'value': 0, 'uom': 2}, # Detected
         {'driver': 'MODE', 'value': 0, 'uom': 2}, # Alerting
         {'driver': 'GPV', 'value': 0, 'uom': 2}, # Streaming
         {'driver': 'GV0', 'value': 0, 'uom': 2}, # 

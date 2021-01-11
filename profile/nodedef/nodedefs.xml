@@ -6,6 +6,8 @@
         <sts>
 			<st id="ST" editor="bool" />
             <st id="MODE" editor="I_HMODEM" /> <!-- Host Mode, MIXED, DEFAULT, HOME -->
+            <st id="GV2" editor="I_CNT" /> <!-- Camects Configured -->
+            <st id="GV3" editor="I_CNT" /> <!-- Camects Connected -->
             <st id="GV1" editor="I_DEBUG" />
 		</sts>
         <cmds>
@@ -54,7 +56,7 @@
         <editors />
         <sts>
             <st id="ST"   editor="bool" /> <!-- Camera Enabled -->
-            <st id="ALARM" editor="I_OBJ" /> <!-- Object Detected -->
+            <st id="ALARM" editor="bool" /> <!-- Object Detected -->
             <st id="MODE" editor="bool" /> <!-- Alerts Enabled -->
             <st id="GPV"  editor="bool" /> <!-- Streaming Enabled -->
         </sts>
