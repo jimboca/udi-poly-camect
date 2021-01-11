@@ -9,7 +9,7 @@
     "shortPoll": "30",
     "longPoll": "300",
     "testMode": false,
-    "profile_version": "0.2.1a",
+    "profile_version": "0.2.1",
     "credits": [
         {
             "title": "camect: a NodeServer for Camect Integration",
