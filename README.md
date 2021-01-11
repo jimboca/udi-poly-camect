@@ -103,6 +103,15 @@ You can create a program to know when a Skunk enters your front yard ![Skunk Pro
 
 You can add the nodes to a scene to know when a Person shows up [Person Scene](pics/ScenePerson.png)
 
+## Discussion Forum
+
+The discussion topic for this nodeserver is at the [UDI Camect Nodeserver V2 Forum](TBD)
+Please discuss issues there, or if you now for sure it is a bug or needed feature add it to issues below.
+
+## Issues
+
+If you have an issue, please add an issue so I can keep track since it is hard to remember issues reported on the Forum.
+
 ## Version History
 
 - 0.2.1:
