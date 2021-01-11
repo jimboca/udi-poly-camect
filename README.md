@@ -17,7 +17,7 @@ This has been tested on an RPI running the latest Buster release and the Polisy 
 
 ## Using this Nodeserver
 
-After configuring and restarting you should get a Node
+After configuring and restarting you should get a Nodes for
 - Each Camect Host
 - Each Camera that is enabled on the Camect hosts
 - Each Camera has mltiple ObjectDetected nodes for the major types of objects currently detected by Camect
@@ -84,8 +84,8 @@ A node is created for each Camera.
   - Alerting: If the Camera is sending Alerts
   - Streaming: If the Camera is streaming
 - The Controls Available:
-  - Enabled: [Coming soon](https://github.com/jimboca/udi-poly-Camect/issues/1)
-  - Alerting: [Coming soon](https://github.com/jimboca/udi-poly-Camect/issues/2)
+  - Enabled: [Not possible yet](https://github.com/jimboca/udi-poly-Camect/issues/1)
+  - Alerting: [Not possible yet](https://github.com/jimboca/udi-poly-Camect/issues/2)
 
 Note that Alerting is updated immediatly from the Camect API when it is changed, however Enabled and Streaming are not so they are updated on every short poll.  Hopefully Camect will add callbacks for these funcitons in the future.
 
@@ -113,7 +113,7 @@ You can add the nodes to a scene to know when a Person shows up [Person Scene](p
 ## Discussion Forum
 
 The discussion topic for this nodeserver is at the [UDI Camect Nodeserver V2 Forum](TBD)
-Please discuss issues there, or if you now for sure it is a bug or needed feature add it to issues below.
+Please discuss issues there, or if you now for sure it is a bug or a good feature then add it to issues described below.
 
 ## Issues
 
