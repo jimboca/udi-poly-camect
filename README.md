@@ -114,12 +114,12 @@ You can add the nodes to a scene to know when a Person shows up [Person Scene](p
 
 ## Discussion Forum
 
-The discussion topic for this nodeserver is at the [UDI Camect Nodeserver V2 Forum](TBD)
+The discussion topic for this nodeserver is at the [UDI Camect Nodeserver V2 Forum](https://forum.universal-devices.com/forum/178-polyglot-v2-camect-nodeserver/)
 Please discuss issues there, or if you now for sure it is a bug or a good feature then add it to issues described below.
 
 ## Issues
 
-If you have an issue, please add an issue so I can keep track since it is hard to remember issues reported on the Forum.
+If you have an issue, please add a [udi-poly-Camect gitub issue](https://github.com/jimboca/udi-poly-Camect/issues) so I can keep track since it is hard to remember issues reported on the Forum.
 
 ## Version History
 
