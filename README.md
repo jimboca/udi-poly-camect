@@ -2,7 +2,9 @@
 
 This is a Polyglot Nodeserver for the [Universal Devices](https://www.universal-devices.com/) ISY to integrate the [Camect](http://camect.com) System.
 
-This is the initial released version so it may change drastically but hopefully not.
+This is the initial released version so it may change drastically but hopefully not.  We have spent a lot of time trying to figure out the best way to handle all the information available.  But if you have better ideas please feel free to let me know.
+
+If you don't have a Camect yet, or will be purchasing another one then please visit my link [Camect Affiliate link](https://camect.kckb.st/edc3936e) to purchase so I get credit for it.
 
 ## Installation
 

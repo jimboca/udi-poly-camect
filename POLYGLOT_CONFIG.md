@@ -1,6 +1,8 @@
 
 # Configure the Camect Node Server
 
+If you don't have a Camect yet, or will be purchasing another one then please visit my link [Camect Affiliate link](https://camect.kckb.st/edc3936e) to purchase so I get credit for it.
+
 You must set the following:
 
 - user: The Camect local user.
