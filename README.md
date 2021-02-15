@@ -123,6 +123,8 @@ If you have an issue, please add a [udi-poly-Camect gitub issue](https://github.
 
 ## Version History
 
+- 0.2.2:
+  - Fixed to use pip3 in install.sh
 - 0.2.1:
   - __IMPORTANT__ Delete NS if running version prior to 0.2.0 !
   - Added count of Camect's Configured and Connected in Controller
