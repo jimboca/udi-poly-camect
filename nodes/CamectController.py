@@ -65,6 +65,7 @@ class CamectController(Controller):
         for id,node in self.nodes_by_id.items():
             node.shortPoll()
 
+
     def longPoll(self):
         LOGGER.debug('')
         self.heartbeat()
@@ -134,7 +135,7 @@ class CamectController(Controller):
                         new = True
                         address = self.controller.get_host_address(camect_info)
                     try:
-                        self.nodes_by_id[camect_info['id']] = self.addNode(Host(self, address, camect_obj, new=new))
+                        self.nodes_by_id[camect_info['id']] = self.addNode(Host(self, address, host['host'], camect_obj, new=new))
                     except:
                         LOGGER.error('Failed to add camect host {host}',exc_info=True)
                         return
@@ -151,6 +152,11 @@ class CamectController(Controller):
 
     def stop(self):
         LOGGER.debug('NodeServer stopped.')
+
+    def reconnect_host(self,host):
+        self.hosts_connected -= 1
+        self.set_hosts_connected()
+        return self.connect_host(host)
 
     def connect_host(self,host):
         LOGGER.info(f'Connecting to {host}...')

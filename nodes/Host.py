@@ -17,9 +17,10 @@ class Host(BaseNode):
         {'driver': 'MODE', 'value': 1, 'uom': 25}, 
     ]
 
-    def __init__(self, controller, address, camect_obj, new=True):
+    def __init__(self, controller, address, host, camect_obj, new=True):
         self.ready      = False
         self.controller = controller
+        self.host       = host
         self.camect     = camect_obj # The camect api handle
         self.new        = new
         self.cams_by_id = {} # The hash of camera nodes by id
@@ -39,10 +40,24 @@ class Host(BaseNode):
         self.camect.add_event_listener(self.callback)
         self.ready = True
 
+    def list_cameras(self):
+        while (True):
+            try:
+                return self.camect.list_cameras()
+            except Exception as err:
+                logger.error(f'list_cameras: {err}')
+            self.camect = False
+
     #
     # We need this because camect doesn't have a callback for 
     # enabled or streaming
     def update_status(self):
+        # Reconnect?
+        if self.camect is False:
+            LOGGER.warning(f'{self.lpfx}: reconnecting since camect={self.camect}')
+            self.camect = self.controller.reconnect_host(self.host)        
+        if self.camect is False:
+            return False
         for cam in self.camect.list_cameras():
             if cam['id'] in self.cams_by_id:
                 #LOGGER.debug(f"{self.lpfx}: Check camera: {cam}")

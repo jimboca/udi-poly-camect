@@ -123,6 +123,9 @@ If you have an issue, please add a [udi-poly-Camect gitub issue](https://github.
 
 ## Version History
 
+- 0.2.3:
+  - Fixed [Crash due to timeout not trapped](https://github.com/jimboca/udi-poly-Camect/issues/13)
+    - Should be fixed, but have to confirm
 - 0.2.2:
   - Fixed to use pip3 in install.sh
 - 0.2.1:
