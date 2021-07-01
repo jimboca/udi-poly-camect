@@ -47,6 +47,7 @@ class Host(BaseNode):
             except Exception as err:
                 logger.error(f'list_cameras: {err}')
             self.camect = False
+            return []
 
     #
     # We need this because camect doesn't have a callback for 
@@ -58,7 +59,7 @@ class Host(BaseNode):
             self.camect = self.controller.reconnect_host(self.host)        
         if self.camect is False:
             return False
-        for cam in self.camect.list_cameras():
+        for cam in self.list_cameras():
             if cam['id'] in self.cams_by_id:
                 #LOGGER.debug(f"{self.lpfx}: Check camera: {cam}")
                 self.cams_by_id[cam['id']].update_status(cam)
