@@ -41,13 +41,12 @@ class Host(BaseNode):
         self.ready = True
 
     def list_cameras(self):
-        while (True):
-            try:
-                return self.camect.list_cameras()
-            except Exception as err:
-                logger.error(f'list_cameras: {err}')
-            self.camect = False
-            return []
+        try:
+            return self.camect.list_cameras()
+        except Exception as err:
+            LOGGER.error(f'list_cameras: {err}')
+        self.camect = False
+        return []
 
     #
     # We need this because camect doesn't have a callback for 
@@ -116,7 +115,7 @@ class Host(BaseNode):
     def discover(self):
         # TODO: Keep cams_by_id in DB to remember across restarts and discovers...
         LOGGER.info('started')
-        for cam in self.camect.list_cameras():
+        for cam in self.list_cameras():
             LOGGER.debug(f"{self.lpfx}: Check camera: {cam}")
             # Only add enabled cameras?
             if not cam['disabled']:

@@ -123,6 +123,8 @@ If you have an issue, please add a [udi-poly-Camect gitub issue](https://github.
 
 ## Version History
 
+- 0.2.5: 08/14/2021
+  - Another attempt to fix simlar crash [Crash due hub not responding](https://github.com/jimboca/udi-poly-Camect/issues/15)
 - 0.2.4:
   - More fixes for [Crash due to timeout not trapped](https://github.com/jimboca/udi-poly-Camect/issues/13)
 - 0.2.3:
