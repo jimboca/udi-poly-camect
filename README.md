@@ -122,7 +122,8 @@ Please discuss issues there, or if you now for sure it is a bug or a good featur
 If you have an issue, please add a [udi-poly-Camect gitub issue](https://github.com/jimboca/udi-poly-Camect/issues) so I can keep track since it is hard to remember issues reported on the Forum.
 
 ## Version History
-
+- 0.2.6: 01/21/2021
+  - No change, just incrment verison number to see if that fixes PG2 using PG3 version
 - 0.2.5: 08/14/2021
   - Another attempt to fix simlar crash [Crash due hub not responding](https://github.com/jimboca/udi-poly-Camect/issues/15)
 - 0.2.4:
